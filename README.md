@@ -27,7 +27,7 @@ This project requires the following additional libraries:
 
 ### 1. Data Preparation
 There are no modifications to data preprocessing compared to the original SuffixTransformerNetwork repository. Please refer to the original repo for:
-- dataset load,
+- dataset load (BPIC 17, BPIC 19 dataset were removed from original code repository, so find dataset from SuffixTransformerNetwork repository),
 - trace extraction,
 - prefix-suffix generation.
 
