@@ -323,7 +323,7 @@ def cdeint_fixed_step(X, z0, func, ts):
     return z_t
 
 
-class NODE_no_context(nn.Module):
+class NODE_hermitInter(nn.Module):
     def __init__(self, input_channels: int, hidden_dim: int, num_activities: int, dropout: float = 0.2):
         super().__init__()
         self.hidden_dim = hidden_dim
@@ -376,14 +376,14 @@ class NODE_no_context(nn.Module):
             return act_logits, ttne_pred, rrt_pred
 
         else:
-            act_logits = self.act_head(z_t).argmax(-1)  # shape [B, T] → predict argmax index directly
-            ttne_pred = self.ttne_head(z_t).squeeze(-1)           # shape [B, T, 1] → [B, T]
-            rrt_pred = self.rrt_head(z_t[:, 0, :]).squeeze(-1)    # predict RRT from t=0 only → shape [B]
+            act_logits = self.act_head(z_t).argmax(-1)  # shape [B, T] -> predict argmax index directly
+            ttne_pred = self.ttne_head(z_t).squeeze(-1)           # shape [B, T, 1] -> [B, T]
+            rrt_pred = self.rrt_head(z_t[:, 0, :]).squeeze(-1)    # predict RRT from t=0 only -> shape [B]
 
             return act_logits, ttne_pred, rrt_pred
 
 
-class NODE_linear(nn.Module):
+class NODE_no_context(nn.Module):
     def __init__(self, input_channels: int, hidden_dim: int, num_activities: int, dropout: float = 0.2):
         super().__init__()
         self.hidden_dim = hidden_dim
@@ -431,8 +431,8 @@ class NODE_linear(nn.Module):
             return act_logits, ttne_pred, rrt_pred
 
         else:
-            act_logits = self.act_head(z_t).argmax(-1)  # shape [B, T] → predict argmax index directly
-            ttne_pred = self.ttne_head(z_t).squeeze(-1)           # shape [B, T, 1] → [B, T]
-            rrt_pred = self.rrt_head(z_t[:, 0, :]).squeeze(-1)    # predict RRT from t=0 only → shape [B]
+            act_logits = self.act_head(z_t).argmax(-1)  # shape [B, T] -> predict argmax index directly
+            ttne_pred = self.ttne_head(z_t).squeeze(-1)           # shape [B, T, 1] -> [B, T]
+            rrt_pred = self.rrt_head(z_t[:, 0, :]).squeeze(-1)    # predict RRT from t=0 only -> shape [B]
 
             return act_logits, ttne_pred, rrt_pred
